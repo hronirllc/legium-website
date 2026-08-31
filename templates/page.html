@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block head_meta %}
+  {{<seo
+      title={page.title ~ " — " ~ config.title}
+      description={page.description or config.description}
+      canonical={page.permalink}
+      og_type="article" />}}
+{% endblock head_meta %}
+
+{% block content %}
+  <article>
+    <header class="post-head">
+      <h1>{{ page.title }}</h1>
+      <div class="post-meta">
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%d %B %Y") }}</time>
+        {% for tag in page.taxonomies?.tags or [] %}
+          <a class="tag" href="{{ get_taxonomy_url(kind='tags', term=tag) }}">{{ tag }}</a>
+        {% endfor %}
+      </div>
+    </header>
+
+    <div class="prose">
+      {{ page.content | safe }}
+    </div>
+  </article>
+
+  <a class="back" href="{{ get_url(path='@/blog/_index.md') }}">All posts</a>
+{% endblock content %}

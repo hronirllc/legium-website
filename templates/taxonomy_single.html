@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head_meta %}
+  {{<seo
+      title={term.name ~ " — " ~ config.title}
+      description={"Journal posts tagged " ~ term.name ~ "."}
+      canonical={term.permalink} />}}
+{% endblock head_meta %}
+
+{% block content %}
+  <h2 class="label">Tagged</h2>
+  <h1>{{ term.name }}</h1>
+
+  <ul class="posts" style="margin-top: clamp(2.5rem, 8vmin, 4rem)">
+    {% for post in term.pages %}
+      {{<post_row post={post} />}}
+    {% endfor %}
+  </ul>
+
+  <a class="back" href="{{ get_url(path='@/blog/_index.md') }}">All posts</a>
+{% endblock content %}

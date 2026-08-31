@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block head_meta %}
+  {{<seo
+      title={"Tags — " ~ config.title}
+      description="Every tag used in the Legium journal."
+      canonical={config.base_url ~ "/tags/"} />}}
+{% endblock head_meta %}
+
+{% block content %}
+  <h1>Tags</h1>
+  <ul class="posts" style="margin-top: clamp(2.5rem, 8vmin, 4rem)">
+    {% for term in terms %}
+      <li>
+        <a href="{{ term.permalink }}">
+          <time>{{ term.pages | length }} post{% if term.pages | length != 1 %}s{% endif %}</time>
+          <h2>{{ term.name }}</h2>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a class="back" href="{{ get_url(path='@/blog/_index.md') }}">All posts</a>
+{% endblock content %}

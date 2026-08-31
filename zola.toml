@@ -1,0 +1,47 @@
+# The URL the site is built for. Change this and static/CNAME together;
+# nothing else in the site hardcodes a hostname.
+base_url = "https://legium.app"
+
+title = "Legium"
+description = "A commonplace book for printed pages. Photograph a passage, keep it under its true attribution, and find it again by meaning."
+
+default_language = "en"
+compile_sass = true
+minify_html = true
+build_search_index = false
+
+# Written to /rss.xml, and linked from every page's <head>.
+generate_feeds = true
+feed_filenames = ["rss.xml"]
+
+taxonomies = [{ name = "tags", feed = false, paginate_by = 0 }]
+
+[markdown]
+smart_punctuation = true
+external_links_target_blank = true
+external_links_no_referrer = true
+
+[markdown.highlighting]
+theme = "vitesse-dark"
+
+[extra]
+tagline = "photograph the page, keep the passage"
+hronir_url = "https://hronir.dev"
+
+# The cards on the homepage. Add, remove or reorder freely — the template
+# just iterates this list.
+[[extra.features]]
+title = "Capture"
+body = "Photograph a page. The text is read on the device, the passage is yours to mark, and what the camera got wrong you fix by hand."
+
+[[extra.features]]
+title = "Attribution"
+body = "Work, edition, translator, editor — kept as structure rather than as tags. Two translations of one poem stay two things."
+
+[[extra.features]]
+title = "Recall"
+body = "Search by what a passage meant, not only by the words in it. The index is built and queried on the device."
+
+[[extra.features]]
+title = "Custody"
+body = "Your library syncs through your own iCloud and exports whole to JSON. Nothing is held anywhere you cannot reach."

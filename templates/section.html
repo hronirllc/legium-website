@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block head_meta %}
+  {{<seo
+      title={section.title ~ " — " ~ config.title}
+      description={section.description or config.description}
+      canonical={section.permalink} />}}
+{% endblock head_meta %}
+
+{% block content %}
+  <h1>{{ section.title }}</h1>
+  {% if section.description %}<p class="lede">{{ section.description }}</p>{% endif %}
+
+  {% if not section.pages %}
+    <div class="status"><p>Nothing published yet.</p></div>
+  {% else %}
+    <ul class="posts" style="margin-top: clamp(2.5rem, 8vmin, 4rem)">
+      {% for post in section.pages %}
+        {{<post_row post={post} />}}
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock content %}

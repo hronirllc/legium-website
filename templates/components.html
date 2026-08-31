@@ -1,0 +1,70 @@
+{# ---------------------------------------------------------------------------
+   Components (Tera v2). Registered globally — no import anywhere.
+   --------------------------------------------------------------------------- #}
+
+{# The Legium mark: a page spread with one passage marked, inside a targeting
+   bracket. Purely geometric — an open book read by a machine. #}
+{% component mark(class: string = "", title: string = "") %}
+<svg
+  {% if class %}class="{{ class }}"{% endif %}
+  viewBox="0 0 64 64"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  {% if title %}role="img"{% else %}aria-hidden="true"{% endif %}
+>
+  {% if title %}<title>{{ title }}</title>{% endif %}
+
+  {# targeting brackets #}
+  <g stroke="#2ee9dd" stroke-width="1.5" opacity="0.75">
+    <path d="M4 15V4h11" />
+    <path d="M49 4h11v11" />
+    <path d="M60 49v11H49" />
+    <path d="M15 60H4V49" />
+  </g>
+
+  {# page spread #}
+  <g stroke="#f7f2df" stroke-width="1.25" opacity="0.9">
+    <path d="M8 16h48v32H8z" />
+    <path d="M32 16v32" />
+  </g>
+
+  {# lines of type #}
+  <g stroke="#c9c2b0" stroke-width="1.5" stroke-linecap="square" opacity="0.42">
+    <path d="M13 23h14M37 23h14" />
+    <path d="M13 28h14M37 28h14" />
+    <path d="M37 34h14" />
+    <path d="M13 39h10M37 39h14" />
+  </g>
+
+  {# the captured passage #}
+  <path d="M13 34h14" stroke="#ffe45c" stroke-width="2.5" stroke-linecap="square" />
+</svg>
+{% endcomponent mark %}
+
+
+{# Per-page metadata. Every template overrides base.html's `head_meta` block
+   with exactly one call to this, which keeps <title> and og:title in step —
+   Tera v2 has no way to render a block twice. #}
+{% component seo(title: string, description: string, canonical: string, og_type: string = "website") %}
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}" />
+  <link rel="canonical" href="{{ canonical }}" />
+
+  <meta property="og:title" content="{{ title }}" />
+  <meta property="og:description" content="{{ description }}" />
+  <meta property="og:type" content="{{ og_type }}" />
+  <meta property="og:url" content="{{ canonical }}" />
+  <meta name="twitter:card" content="summary" />
+{% endcomponent seo %}
+
+
+{# One row in a list of posts. #}
+{% component post_row(post) %}
+<li>
+  <a href="{{ post.permalink }}">
+    <time datetime="{{ post.date }}">{{ post.date | date(format="%d %b %Y") }}</time>
+    <h2>{{ post.title }}</h2>
+    {% if post.description %}<p>{{ post.description }}</p>{% endif %}
+  </a>
+</li>
+{% endcomponent post_row %}

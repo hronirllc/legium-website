@@ -1,0 +1,5 @@
+# Zola's build output
+public/
+
+.DS_Store
+*.log

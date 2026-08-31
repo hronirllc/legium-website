@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head_meta %}
+  {{<seo
+      title={"Not found — " ~ config.title}
+      description="No page at this address."
+      canonical={config.base_url ~ "/404.html"} />}}
+{% endblock head_meta %}
+
+{% block content %}
+  <h1>404</h1>
+  <p class="tagline">no such passage</p>
+  <p class="lede">
+    Nothing is kept at this address. It may have been a secondary object all along.
+  </p>
+  <a class="back" href="{{ get_url(path='/') }}">Back to the start</a>
+{% endblock content %}
