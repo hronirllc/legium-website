@@ -3,7 +3,7 @@
 base_url = "https://legium.app"
 
 title = "Legium"
-description = "A commonplace book for printed pages. Photograph a passage, keep it under its true attribution, and find it again by meaning."
+description = "Legium keeps the passages and notes you save from books, screenshots and web pages, each with its source, and finds them again by their words or by what they were about. For iPhone and iPad."
 
 default_language = "en"
 compile_sass = true
@@ -25,23 +25,46 @@ external_links_no_referrer = true
 theme = "vitesse-dark"
 
 [extra]
-tagline = "photograph the page, keep the passage"
+tagline = "Paper, screen or web. It's in your library"
 hronir_url = "https://hronir.dev"
 
-# The cards on the homepage. Add, remove or reorder freely — the template
-# just iterates this list.
-[[extra.features]]
-title = "Capture"
-body = "Photograph a page. The text is read on the device, the passage is yours to mark, and what the camera got wrong you fix by hand."
+# The homepage's two groups of cards. Add, remove or reorder freely — the
+# template just iterates these lists. Keep each group's card count even: the
+# cards sit two to a row.
+[[extra.sections]]
+title = "Where a note comes from"
 
-[[extra.features]]
-title = "Attribution"
-body = "Work, edition, translator, editor — kept as structure rather than as tags. Two translations of one poem stay two things."
+[[extra.sections.cards]]
+title = "A page in a book"
+body = "Photograph the page and draw over the lines you want. Legium reads the text on your phone, and you correct anything it got wrong."
 
-[[extra.features]]
-title = "Recall"
-body = "Search by what a passage meant, not only by the words in it. The index is built and queried on the device."
+[[extra.sections.cards]]
+title = "A screenshot"
+body = "Highlight in your reading app and take a screenshot. Legium keeps the highlighted lines, together or as separate passages."
 
-[[extra.features]]
-title = "Custody"
-body = "Your library syncs through your own iCloud and exports whole to JSON. Nothing is held anywhere you cannot reach."
+[[extra.sections.cards]]
+title = "A web page"
+body = "Select the text in Safari and share it to Legium. The passage arrives with the page's title, author and address."
+
+[[extra.sections.cards]]
+title = "Typed, pasted or imported"
+body = "Type or paste a passage, or import a book's highlights from the notebook file your e-reader app exports. Add a note of your own under any of them."
+
+[[extra.sections]]
+title = "Keeping them in order"
+
+[[extra.sections.cards]]
+title = "Sources"
+body = "Every passage stays with its book, article or poem, with the author, translator and page. Open a source to see everything you kept from it."
+
+[[extra.sections.cards]]
+title = "Tags"
+body = "Tag a passage, or tag a book once and every passage from it carries the tag. Star the tags you use most."
+
+[[extra.sections.cards]]
+title = "Search"
+body = "Search by the words you remember, or by what the passage was about when you remember none of them. Search runs on your phone."
+
+[[extra.sections.cards]]
+title = "Yours"
+body = "Your library syncs between your iPhone and iPad through your own iCloud and exports to one file. Legium has no accounts and no analytics."

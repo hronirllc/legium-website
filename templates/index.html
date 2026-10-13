@@ -11,43 +11,38 @@
   {%- set blog = get_section(path="blog/_index.md") -%}
 
   <section class="hero">
-    {{<mark class="hero__mark" title="Legium" />}}
+    {{<mark class="hero__mark" title="Legium" size={144} />}}
     <h1>{{ config.title }}</h1>
     <p class="tagline">{{ config.extra.tagline }}</p>
     <p class="lede">
-      A commonplace book for the books you own on paper. Mark a passage with the camera,
-      keep it under its true attribution, and find it years later by what it meant.
+      Legium keeps the passages and notes you want to hold on to, whether they come from a
+      photographed page, a screenshot, a web article or your own typing. Each one stays
+      with its source, and you can find it again by its words or by what it was about.
     </p>
   </section>
 
-  <figure class="passage">
-    <blockquote>
-      Two persons look for a pencil; the first finds it and says nothing; the second finds
-      a second pencil, no less real, but closer to his expectations. These secondary
-      objects are called <em>hrönir</em>.
-    </blockquote>
-    <figcaption>
-      Jorge Luis Borges · <em>Tlön, Uqbar, Orbis Tertius</em> · trans. James E. Irby · p. 28
-    </figcaption>
-  </figure>
-
-  <section>
-    <h2 class="label">What it does</h2>
-    <ul class="grid-cards">
-      {% for card in config.extra.features %}
-        <li class="card">
-          <h3>{{ card.title }}</h3>
-          <p>{{ card.body }}</p>
-        </li>
-      {% endfor %}
-    </ul>
-  </section>
+  {% for section in config.extra.sections %}
+    <section class="feature">
+      <h2 class="label">{{ section.title }}</h2>
+      <ul class="grid-cards">
+        {% for card in section.cards %}
+          <li class="card">
+            <h3>{{ card.title }}</h3>
+            <p>{{ card.body }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
 
   <aside class="status">
     <p>
-      <strong>Legium is being built.</strong> It runs daily against real shelves and is not
-      yet on the App Store. The <a href="{{ get_url(path='@/blog/_index.md') }}">journal</a>
-      is where the work gets written down as it happens.
+      <strong>Legium is not on the App Store yet.</strong> It is for iPhone and iPad on
+      iOS 26, and it is in daily use while it is finished. To try the beta, write to
+      {{<email subject="Legium beta" />}}.
+      {% if blog.pages %}
+        The <a href="{{ get_url(path='@/blog/_index.md') }}">journal</a> follows the work.
+      {% endif %}
     </p>
   </aside>
 

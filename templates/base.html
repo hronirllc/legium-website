@@ -8,21 +8,27 @@
       {{<seo title={config.title} description={config.description} canonical={config.base_url} />}}
     {% endblock head_meta %}
 
-    <link rel="icon" href="{{ get_url(path='favicon.svg') }}" type="image/svg+xml" />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="{{ config.title }} — Journal"
-      href="{{ get_url(path='rss.xml') }}"
-    />
+    <link rel="icon" href="{{ get_url(path='favicon.png') }}" type="image/png" />
+    <link rel="apple-touch-icon" href="{{ get_url(path='img/legium-180.png') }}" />
+    {#- The journal shows in the menu, the footer and here only once it has a
+        published post. -#}
+    {%- set journal = get_section(path="blog/_index.md") -%}
+    {% if journal.pages %}
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title="{{ config.title }} — Journal"
+        href="{{ get_url(path='rss.xml') }}"
+      />
+    {% endif %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500;700&display=swap"
-    />
+    {#- The two typefaces are served from /fonts/ (see sass/main.scss). Only the
+        ones the first screen needs are preloaded. -#}
+    <link rel="preload" href="{{ get_url(path='fonts/jetbrains-mono-roman-latin.woff2') }}" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="{{ get_url(path='fonts/eb-garamond-roman-latin.woff2') }}" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="{{ get_url(path='main.css') }}" />
+
+    <script src="{{ get_url(path='email.js') }}" defer></script>
 
     {% block head %}{% endblock head %}
   </head>
@@ -39,7 +45,10 @@
           {{ config.title }}
         </a>
         <nav class="nav" aria-label="Primary">
-          {%- set nav = [["/", "App"], ["/blog/", "Journal"]] -%}
+          {%- set nav = [["/", "App"]] -%}
+          {%- if journal.pages -%}
+            {%- set nav = [["/", "App"], ["/blog/", "Journal"]] -%}
+          {%- endif -%}
           {#- `current_path` is undefined on 404, which has no page behind it. -#}
           {%- set here = current_path or "" -%}
           {%- for item in nav %}
@@ -67,7 +76,11 @@
               height="13"
             /></a>
         </span>
-        <a href="{{ get_url(path='rss.xml') }}">RSS</a>
+        <nav class="colophon__links" aria-label="Site">
+          <a href="{{ get_url(path='@/privacy.md') }}">Privacy</a>
+          <a href="{{ get_url(path='@/support.md') }}">Support</a>
+          {% if journal.pages %}<a href="{{ get_url(path='rss.xml') }}">RSS</a>{% endif %}
+        </nav>
       </div>
     </footer>
   </body>

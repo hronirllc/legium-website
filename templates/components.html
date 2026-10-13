@@ -2,43 +2,19 @@
    Components (Tera v2). Registered globally — no import anywhere.
    --------------------------------------------------------------------------- #}
 
-{# The Legium mark: a page spread with one passage marked, inside a targeting
-   bracket. Purely geometric — an open book read by a machine. #}
-{% component mark(class: string = "", title: string = "") %}
-<svg
+{# The Legium mark: the app's icon, an open book with a flower growing from
+   it. `size` is the width it is drawn at, in CSS pixels; the file is chosen to
+   have twice that many. With no `title` it is decoration and hidden from
+   screen readers. #}
+{% component mark(class: string = "", title: string = "", size: integer = 28) %}
+<img
   {% if class %}class="{{ class }}"{% endif %}
-  viewBox="0 0 64 64"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
-  {% if title %}role="img"{% else %}aria-hidden="true"{% endif %}
->
-  {% if title %}<title>{{ title }}</title>{% endif %}
-
-  {# targeting brackets #}
-  <g stroke="#2ee9dd" stroke-width="1.5" opacity="0.75">
-    <path d="M4 15V4h11" />
-    <path d="M49 4h11v11" />
-    <path d="M60 49v11H49" />
-    <path d="M15 60H4V49" />
-  </g>
-
-  {# page spread #}
-  <g stroke="#f7f2df" stroke-width="1.25" opacity="0.9">
-    <path d="M8 16h48v32H8z" />
-    <path d="M32 16v32" />
-  </g>
-
-  {# lines of type #}
-  <g stroke="#c9c2b0" stroke-width="1.5" stroke-linecap="square" opacity="0.42">
-    <path d="M13 23h14M37 23h14" />
-    <path d="M13 28h14M37 28h14" />
-    <path d="M37 34h14" />
-    <path d="M13 39h10M37 39h14" />
-  </g>
-
-  {# the captured passage #}
-  <path d="M13 34h14" stroke="#ffe45c" stroke-width="2.5" stroke-linecap="square" />
-</svg>
+  src="{% if size > 32 %}{{ get_url(path='img/legium-360.webp') }}{% else %}{{ get_url(path='img/legium-64.webp') }}{% endif %}"
+  width="{{ size }}"
+  height="{{ size }}"
+  alt="{{ title }}"
+  {% if not title %}aria-hidden="true"{% endif %}
+/>
 {% endcomponent mark %}
 
 
@@ -54,6 +30,7 @@
   <meta property="og:description" content="{{ description }}" />
   <meta property="og:type" content="{{ og_type }}" />
   <meta property="og:url" content="{{ canonical }}" />
+  <meta property="og:image" content="{{ get_url(path='img/legium-180.png') }}" />
   <meta name="twitter:card" content="summary" />
 {% endcomponent seo %}
 
@@ -68,3 +45,12 @@
   </a>
 </li>
 {% endcomponent post_row %}
+
+
+{# The contact address, kept out of the page source as a plain address:
+   static/email.js makes it a mail link. Called as {{<email />}} from templates
+   and from Markdown alike. The address is the two defaults below; they are
+   here and not in zola.toml because Markdown pages cannot read the config. #}
+{% component email(subject: string = "", user: string = "legium", host: string = "hronir.dev") %}
+<a class="email" data-user="{{ user }}" data-host="{{ host }}"{% if subject %} data-subject="{{ subject }}"{% endif %}>{{ user }} [at] {{ host | replace(from=".", to=" [dot] ") }}</a>
+{%- endcomponent email %}

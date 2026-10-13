@@ -36,6 +36,9 @@ Notes on the front matter, which is TOML between `+++` fences:
 - `date` is unquoted and `YYYY-MM-DD`. Posts sort newest first.
 - `tags` are free-form. A new tag gets its own page at `/tags/<tag>/`
   automatically; no need to register it anywhere.
+- While every post is a draft, the Journal link in the menu, the journal
+  section of the homepage and the RSS links are all left out. They return with
+  the first published post.
 - Add `draft = true` to keep a post out of the site. `zola serve --drafts`
   renders drafts locally so you can read them before publishing.
 
@@ -68,8 +71,10 @@ Two things to know:
 ## Editing the homepage
 
 - Copy that is prose lives in `templates/index.html`.
-- The four cards under "What it does" are `[[extra.features]]` entries in
-  `zola.toml`; add, remove or reorder them freely.
+- The two groups of cards are `[[extra.sections]]` entries in `zola.toml`, each
+  with its own `[[extra.sections.cards]]`; add, remove or reorder them freely.
+- The logo is the app's icon. `static/img/` holds the sizes the site uses and
+  `static/favicon.png` the browser-tab one; remake them all when the icon changes.
 - The tagline is `extra.tagline` in `zola.toml`.
 
 ## Layout of the repo
@@ -82,11 +87,12 @@ templates/
   base.html            the shell every page extends
   components.html      the mark, the <head> metadata, a post row
   index.html           homepage
+  plain.html           a standing page: /privacy/ and /support/
   section.html         /blog/
   page.html            a single post
   taxonomy_*.html      /tags/ and /tags/<tag>/
   404.html
-static/                copied to the site root verbatim (favicon, CNAME)
+static/                copied to the site root verbatim (logo, fonts, CNAME)
 .github/workflows/     build and publish on push to main
 ```
 

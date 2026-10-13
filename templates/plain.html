@@ -1,0 +1,27 @@
+{# A standing page that is not a journal post: /privacy/ and /support/. A page
+   opts in with `template = "plain.html"`, and shows `updated` when it has one. #}
+{% extends "base.html" %}
+
+{% block head_meta %}
+  {{<seo
+      title={page.title ~ " — " ~ config.title}
+      description={page.description or config.description}
+      canonical={page.permalink} />}}
+{% endblock head_meta %}
+
+{% block content %}
+  <article class="sheet">
+    <header class="post-head">
+      <h1>{{ page.title }}</h1>
+      {% if page.updated %}
+        <div class="post-meta">
+          Updated <time datetime="{{ page.updated }}">{{ page.updated | date(format="%d %B %Y") }}</time>
+        </div>
+      {% endif %}
+    </header>
+
+    <div class="prose">
+      {{ page.content | safe }}
+    </div>
+  </article>
+{% endblock content %}
