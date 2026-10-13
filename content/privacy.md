@@ -93,7 +93,7 @@ what you wrote. We use them to answer you, and delete them when you ask.
 
 ## This website
 
-legium.app sets no cookies and runs no analytics, and loads nothing from anyone else.
+This website sets no cookies and runs no analytics, and loads nothing from anyone else.
 GitHub hosts the site, so it sees your browser's request and your IP address when a page
 loads.
 

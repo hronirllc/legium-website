@@ -109,16 +109,12 @@ Zola version, builds, and deploys to Pages. In the repository settings, under
 
 ### The domain
 
-The site is configured for a custom domain in exactly two places, which must
-agree:
+The site is published at `hronirllc.github.io/legium-website`, the address
+GitHub gives the repository. Every internal link goes through `get_url`, so
+moving it to a domain of its own takes three changes:
 
-- `base_url` in `zola.toml`
-- `static/CNAME`
-
-Both currently say `legium.app`. Change them together, then point the domain at
-GitHub with a `CNAME` record for a subdomain, or `A` records to GitHub's four
-Pages addresses for an apex domain.
-
-To publish at `hronirllc.github.io/legium-website` instead, delete
-`static/CNAME` and set `base_url = "https://hronirllc.github.io/legium-website"`.
-Every internal link goes through `get_url`, so nothing else needs touching.
+- set `base_url` in `zola.toml` to the new address
+- add `static/CNAME` holding the bare domain, and set the same domain under
+  **Pages** in the repository settings
+- point the domain at GitHub: a `CNAME` record to `hronirllc.github.io` for a
+  subdomain, or `A` records to GitHub's four Pages addresses for an apex domain
