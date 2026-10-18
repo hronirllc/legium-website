@@ -41,14 +41,14 @@
       iOS 26, and it is in daily use while it is finished. To try the beta, write to
       {{<email subject="Legium beta" />}}.
       {% if blog.pages %}
-        The <a href="{{ get_url(path='@/blog/_index.md') }}">journal</a> follows the work.
+        The <a href="{{ get_url(path='@/blog/_index.md') }}">blog</a> has notes from building it.
       {% endif %}
     </p>
   </aside>
 
   {% if blog.pages %}
     <section style="margin-top: clamp(3rem, 9vmin, 5rem)">
-      <h2 class="label">From the journal</h2>
+      <h2 class="label">From the blog</h2>
       <ul class="posts">
         {% for post in blog.pages[:3] %}
           {{<post_row post={post} />}}

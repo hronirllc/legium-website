@@ -10,14 +10,14 @@
 
     <link rel="icon" href="{{ get_url(path='favicon.png') }}" type="image/png" />
     <link rel="apple-touch-icon" href="{{ get_url(path='img/legium-180.png') }}" />
-    {#- The journal shows in the menu, the footer and here only once it has a
+    {#- The blog shows in the menu, the footer and here only once it has a
         published post. -#}
-    {%- set journal = get_section(path="blog/_index.md") -%}
-    {% if journal.pages %}
+    {%- set blog = get_section(path="blog/_index.md") -%}
+    {% if blog.pages %}
       <link
         rel="alternate"
         type="application/rss+xml"
-        title="{{ config.title }} — Journal"
+        title="{{ config.title }} — Blog"
         href="{{ get_url(path='rss.xml') }}"
       />
     {% endif %}
@@ -46,8 +46,8 @@
         </a>
         <nav class="nav" aria-label="Primary">
           {%- set nav = [["/", "App"]] -%}
-          {%- if journal.pages -%}
-            {%- set nav = [["/", "App"], ["/blog/", "Journal"]] -%}
+          {%- if blog.pages -%}
+            {%- set nav = [["/", "App"], ["/blog/", "Blog"]] -%}
           {%- endif -%}
           {#- `current_path` is undefined on 404, which has no page behind it. -#}
           {%- set here = current_path or "" -%}
@@ -79,7 +79,7 @@
         <nav class="colophon__links" aria-label="Site">
           <a href="{{ get_url(path='@/privacy.md') }}">Privacy</a>
           <a href="{{ get_url(path='@/support.md') }}">Support</a>
-          {% if journal.pages %}<a href="{{ get_url(path='rss.xml') }}">RSS</a>{% endif %}
+          {% if blog.pages %}<a href="{{ get_url(path='rss.xml') }}">RSS</a>{% endif %}
         </nav>
       </div>
     </footer>

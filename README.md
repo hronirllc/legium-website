@@ -36,7 +36,7 @@ Notes on the front matter, which is TOML between `+++` fences:
 - `date` is unquoted and `YYYY-MM-DD`. Posts sort newest first.
 - `tags` are free-form. A new tag gets its own page at `/tags/<tag>/`
   automatically; no need to register it anywhere.
-- While every post is a draft, the Journal link in the menu, the journal
+- While every post is a draft, the Blog link in the menu, the blog
   section of the homepage and the RSS links are all left out. They return with
   the first published post.
 - Add `draft = true` to keep a post out of the site. `zola serve --drafts`
