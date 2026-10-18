@@ -1,4 +1,4 @@
-# legium.app
+# Legium website
 
 The website for **Legium**, an iOS app by [Hronir LLC](https://hronir.dev).
 Built with [Zola](https://www.getzola.org) and published to GitHub Pages.
@@ -109,12 +109,22 @@ Zola version, builds, and deploys to Pages. In the repository settings, under
 
 ### The domain
 
-The site is published at `hronirllc.github.io/legium-website`, the address
-GitHub gives the repository. Every internal link goes through `get_url`, so
-moving it to a domain of its own takes three changes:
+The site is published at `legium.app`. The domain is registered at Namecheap
+and uses Namecheap's DNS, where Advanced DNS holds:
 
-- set `base_url` in `zola.toml` to the new address
-- add `static/CNAME` holding the bare domain, and set the same domain under
-  **Pages** in the repository settings
-- point the domain at GitHub: a `CNAME` record to `hronirllc.github.io` for a
-  subdomain, or `A` records to GitHub's four Pages addresses for an apex domain
+| Type  | Host  | Value                 |
+|-------|-------|-----------------------|
+| A     | `@`   | `185.199.108.153`     |
+| A     | `@`   | `185.199.109.153`     |
+| A     | `@`   | `185.199.110.153`     |
+| A     | `@`   | `185.199.111.153`     |
+| CNAME | `www` | `hronirllc.github.io.` |
+
+GitHub redirects `www.legium.app` and `hronirllc.github.io/legium-website` to
+`legium.app`. The domain is also set in `static/CNAME` and under **Pages** in
+the repository settings, with **Enforce HTTPS** on; `.app` domains only load
+over HTTPS.
+
+Every internal link goes through `get_url`, so moving to another address means
+changing `base_url` in `zola.toml`, `static/CNAME`, the Pages setting and the
+DNS records.

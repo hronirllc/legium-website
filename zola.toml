@@ -1,7 +1,7 @@
 # The URL the site is built for. This is the GitHub Pages address, used until
 # the site has a domain of its own; README.md, "The domain", says how to move
 # it. The privacy page names the site in its text and needs changing as well.
-base_url = "https://hronirllc.github.io/legium-website"
+base_url = "https://legium.app"
 
 title = "Legium"
 description = "Legium keeps the passages and notes you save from books, screenshots and web pages, each with its source, and finds them again by their words or by what they were about. For iPhone and iPad."
