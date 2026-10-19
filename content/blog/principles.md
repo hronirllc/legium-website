@@ -1,6 +1,6 @@
 +++
 title = "Principles"
-description = "Legium is a commonplace book for your phone."
+description = "The core principles for developing the Legium app."
 date = 2026-10-18
 
 [taxonomies]
